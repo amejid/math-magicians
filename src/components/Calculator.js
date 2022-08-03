@@ -11,7 +11,7 @@ class Calculator extends Component {
     this.state = {
       total: 0,
       next: null,
-      operator: null,
+      operation: null,
     };
 
     this.clickHandler = this.clickHandler.bind(this);
@@ -20,7 +20,7 @@ class Calculator extends Component {
 
   displayHandler(e) {
     const val = e.target.textContent;
-    this.setState({ total: val });
+    this.setState((prevState) => ({ ...prevState, total: val }));
   }
 
   clickHandler(e) {
