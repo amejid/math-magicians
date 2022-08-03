@@ -1,115 +1,63 @@
-/* eslint-disable react/prefer-stateless-function */
-import { Component } from 'react';
+import { useState } from 'react';
 import calculate from '../logic/calculate';
+import Button from './Button';
 
 import './Calculator.css';
 
-class Calculator extends Component {
-  constructor(props) {
-    super(props);
+const Calculator = () => {
+  const [data, setData] = useState({ total: 0, next: null, operation: null });
 
-    this.state = {
-      total: 0,
-      next: null,
-      operation: null,
-    };
-
-    this.clickHandler = this.clickHandler.bind(this);
-    this.displayHandler = this.displayHandler.bind(this);
-  }
-
-  displayHandler(e) {
+  const displayHandler = (e) => {
     const val = e.target.textContent;
-    this.setState((prevState) => ({ ...prevState, total: val }));
-  }
+    setData((prevState) => ({ ...prevState, total: val }));
+  };
 
-  clickHandler(e) {
-    const val = e.target.textContent;
-    const res = calculate(this.state, val);
-    this.setState(res);
-  }
+  const clickHandler = (val) => {
+    const res = calculate(data, val);
+    setData(res);
+  };
 
-  render() {
-    const { total, next, operation } = this.state;
-    return (
-      <div className="calculator">
-        <div className="result" onChange={this.displayHandler}>
-          <p>
-            {total}
-            {operation}
-            {next}
-          </p>
-        </div>
-        <div className="row">
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            AC
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            +/-
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            %
-          </button>
-          <button type="button" className="btn btn--op" onClick={this.clickHandler}>
-            ÷
-          </button>
-        </div>
-        <div className="row">
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            7
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            8
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            9
-          </button>
-          <button type="button" className="btn btn--op" onClick={this.clickHandler}>
-            x
-          </button>
-        </div>
-        <div className="row">
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            4
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            5
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            6
-          </button>
-          <button type="button" className="btn btn--op" onClick={this.clickHandler}>
-            -
-          </button>
-        </div>
-        <div className="row">
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            1
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            2
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            3
-          </button>
-          <button type="button" className="btn btn--op" onClick={this.clickHandler}>
-            +
-          </button>
-        </div>
-        <div className="row">
-          <button type="button" className="btn btn--zero" onClick={this.clickHandler}>
-            0
-          </button>
-          <button type="button" className="btn" onClick={this.clickHandler}>
-            .
-          </button>
-          <button type="button" className="btn btn--op" onClick={this.clickHandler}>
-            =
-          </button>
-        </div>
+  const { total, next, operation } = data;
+  return (
+    <div className="calculator">
+      <div className="result" onChange={displayHandler}>
+        <p>
+          {total}
+          {operation}
+          {next}
+        </p>
       </div>
-    );
-  }
-}
+      <div className="row">
+        <Button onValueChange={clickHandler} text="AC" />
+        <Button onValueChange={clickHandler} text="+/-" />
+        <Button onValueChange={clickHandler} text="%" />
+        <Button onValueChange={clickHandler} text="÷" extra="btn--op" />
+      </div>
+      <div className="row">
+        <Button onValueChange={clickHandler} text="7" />
+        <Button onValueChange={clickHandler} text="8" />
+        <Button onValueChange={clickHandler} text="9" />
+        <Button onValueChange={clickHandler} text="x" extra="btn--op" />
+      </div>
+      <div className="row">
+        <Button onValueChange={clickHandler} text="4" />
+        <Button onValueChange={clickHandler} text="5" />
+        <Button onValueChange={clickHandler} text="6" />
+        <Button onValueChange={clickHandler} text="-" extra="btn--op" />
+      </div>
+      <div className="row">
+        <Button onValueChange={clickHandler} text="1" />
+        <Button onValueChange={clickHandler} text="2" />
+        <Button onValueChange={clickHandler} text="3" />
+        <Button onValueChange={clickHandler} text="+" extra="btn--op" />
+      </div>
+      <div className="row">
+        <Button onValueChange={clickHandler} text="0" extra="btn--zero" />
+        <Button onValueChange={clickHandler} text="." />
+        <Button onValueChange={clickHandler} text="=" extra="btn--op" />
+      </div>
+    </div>
+  );
+};
 
 export default Calculator;
