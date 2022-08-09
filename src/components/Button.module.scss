@@ -1,0 +1,15 @@
+.btn {
+  cursor: pointer;
+  border: none;
+  border-right: 2px solid #d8d8d8;
+  background: #e0e0e0;
+  padding: 1.5rem 0;
+
+  &--op {
+    background: #f5912e;
+  }
+
+  &--zero {
+    grid-column: span 2;
+  }
+}

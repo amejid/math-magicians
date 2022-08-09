@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 
+import styles from './Button.module.scss';
+
 const Button = (props) => {
   const { text, onValueChange, extra } = props;
   const clickHandler = (e) => {
     onValueChange(e.target.textContent);
   };
 
-  const classes = `btn ${extra}`;
+  const classes = `${styles.btn} ${styles[extra]}`;
 
   return (
     <button type="button" className={classes} onClick={clickHandler}>
