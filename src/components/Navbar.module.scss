@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+
+  &__title:link,
+  &__title:visited {
+    font-size: 3.2rem;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 5rem;
+
+    li {
+      font-size: 1.6rem;
+
+      a:link,
+      a:visited {
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .active {
+        color: orangered;
+      }
+    }
+  }
+}
